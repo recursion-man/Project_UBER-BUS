@@ -3,6 +3,13 @@
 //
 
 #include "Request.h"
+#include <memory>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <iomanip>
+#include <sys/types.h>
+
 using wlock = std::unique_lock<std::shared_timed_mutex>;
 
 

@@ -18,7 +18,7 @@ class Driver;
 using wlock = std::unique_lock<std::shared_timed_mutex>;
 using rlock = std::shared_lock<std::shared_timed_mutex>;
 
-enum Location{Jerusalem, TLV, Haifa};
+enum class Location{Jerusalem, TLV, Haifa};
 
 
 class ThreadPool {

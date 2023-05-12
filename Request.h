@@ -14,6 +14,7 @@ protected:
     std::string address;
     std::string text;
 public:
+    Request(char * address_path);
     virtual void Execute() = 0;
     std::string getAddress() const;
     void Message() const;
@@ -23,6 +24,7 @@ public:
 class Driver :public Request
 {
 public:
+    Driver(char * address_path): Request(address_path){}
     void Execute() override;
     void Message(std::string);
 
@@ -32,6 +34,7 @@ public:
 class Passenger :public Request {
 
 public:
+    Passenger(char * address_path): Request(address_path){};
     Location location1;
     std::string location;
     std::string text;

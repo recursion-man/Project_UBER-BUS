@@ -9,7 +9,7 @@
 #include <shared_mutex>
 
 template <typename T>
-class Queue : protected std::queue<T> {  // 1.
+class Queue : protected std::queue<T> {
 public:
     using wlock = std::unique_lock<std::shared_timed_mutex>;
     using rlock = std::shared_lock<std::shared_timed_mutex>;
@@ -26,7 +26,7 @@ public:
 
 public:
     bool empty() const {
-        rlock lock(mtx_);  // 4.a
+        rlock lock(mtx_);
         return std::queue<T>::empty();
     }
 
@@ -43,9 +43,10 @@ public:
         }
     }
 
-    void push(const T& obj) {
+    int push(const T& obj) {
         wlock lock(mtx_);
         std::queue<T>::push(obj);
+        return std::queue<T>::size();
     }
 
     bool pop(T& holder) {

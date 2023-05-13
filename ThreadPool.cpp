@@ -48,7 +48,7 @@ void notifyPasengers(Queue<Passenger*> *queue, Driver* driver)
 void ThreadPool::addPassenger(Passenger* passenger)
 {
     destination_queue[passenger->location1]->push(passenger);
-    if (destination_queue[passenger->location1]->size() > RideSize)
+    if ((destination_queue[passenger->location1]->size() %  RideSize) == 0)
     {
         ready_location.push(passenger->location1);
         wlock lk(check_match_mutex);

@@ -72,19 +72,20 @@ void ThreadPool::markCheck(){
 }
 
 void ThreadPool::Match(){
-    wlock lk(match_mutex);
-    while (checkDrivers() && checkPassengers()) {
-        Driver *driver;
-        Location location;
+    Driver *driver;
+    Location location;
+    wlock lk1(match_mutex);
+    wlock lk2(check_match_mutex);
+    if (checkDrivers() && checkPassengers()) {
+        lk2.unlock();
         ready_drivers.pop(driver);
         ready_location.pop(location);
-        lk.unlock();
+        lk1.unlock();
         driver->Message(LocationToString(location));
         notifyPasengers(destination_queue[location], driver);
-    }
-    wlock lk2(check_match_mutex);
-    if (checkDrivers() && checkPassengers())
+    } else{
         check_match = false;
+    }
 }
 
 

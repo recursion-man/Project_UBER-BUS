@@ -49,6 +49,18 @@ public:
         return std::queue<T>::size();
     }
 
+    bool popAmount(int amount, std::vector<T>& holders) {
+        wlock lock(mtx_);
+        if (std::queue<T>::size() < amount) {
+            return false;
+        } else {
+            for (int i = 0; i < amount; i++){
+                holders.emplace_back(std::move(std::queue<T>::front()));
+                std::queue<T>::pop();}
+        }
+        return true;
+    }
+
     bool pop(T& holder) {
         wlock lock(mtx_);
         if (std::queue<T>::empty()) {

@@ -37,10 +37,10 @@ void ThreadPool::worker_thread()
 
 void notifyPasengers(Queue<Passenger*> *queue, Driver* driver)
 {
-    for (int i=0; i< ThreadPool::RideSize; i++)
+    std::vector<Passenger*> holders;
+    queue->popAmount(ThreadPool::RideSize, holders);
+    for (auto passenger : holders)
     {
-        Passenger* passenger;
-        queue->pop(passenger);
         passenger->Message(driver->getAddress());
     }
 }

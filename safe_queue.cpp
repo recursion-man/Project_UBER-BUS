@@ -28,15 +28,15 @@ int main(){
         t[i].join();
     }
 
-//    SafeQueue<int> q{};
-//
-//    q.push(1);
-//    q.push(3);
-//    q.push(7);
-//    q.push(20);
-//    q.push(4);
-//    q.print();
-//    q.pop();
+    SafeQueue<int> q{};
+
+    q.push(1);
+    q.push(3);
+    q.push(7);
+    q.push(20);
+    q.push(4);
+    q.print();
+    q.pop();
 //    std::cout<<std::endl;
 //    q.print();
 

@@ -52,7 +52,6 @@ void ThreadPool::addPassenger(Passenger* passenger)
     {
         ready_location.push(passenger->location1);
         wlock lk(check_match_mutex);
-
     }
 }
 
@@ -63,12 +62,11 @@ void ThreadPool::addDriver(Driver* driver)
     wlock lk(check_match_mutex);
     if (checkPassengers()) {
         markCheck();
-}
+    }
 }
 
 void ThreadPool::markCheck(){
     check_match = true;
-
 }
 
 void ThreadPool::Match(){
@@ -98,7 +96,6 @@ ThreadPool::ThreadPool(): done(false), check_match(false)
 {
     int const thread_count = std::thread::hardware_concurrency();
     for (int i=0; i<thread_count; i++)
-
         try {
             {
                 threads.emplace_back(&ThreadPool::worker_thread, this);

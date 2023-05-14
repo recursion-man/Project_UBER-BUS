@@ -49,6 +49,12 @@ public:
         return std::queue<T>::size();
     }
 
+    template <typename... Args>
+    void emplace_back(Args&&... args) {
+        wlock lock(mtx_);
+        std::queue<T>::emplace(std::forward<Args>(args)...);
+    }
+
     bool popAmount(int amount, std::vector<T>& holders) {
         wlock lock(mtx_);
         if (std::queue<T>::size() < amount) {
@@ -60,6 +66,7 @@ public:
         }
         return true;
     }
+
 
     bool pop(T& holder) {
         wlock lock(mtx_);

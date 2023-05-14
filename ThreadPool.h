@@ -47,8 +47,6 @@ private:
     Queue<Location> ready_location;
     static Queue<Driver*> ready_drivers;
     std::map< Location, Queue<Passenger*>*> destination_queue;
-
-
 };
 
 
